@@ -21,10 +21,22 @@ const getCurrentData = async () => {
         .text();
 
       coinForm.price = $(el).find("td:nth-child(4) div span").text();
-      coinForm.hour1 = $(el).find("td:nth-child(5) span").text();
-      coinForm.hour24 = $(el).find("td:nth-child(6) span").text();
-      coinForm.day7 = $(el).find("td:nth-child(7) span").text();
+      const hour1 = $(el).find("td:nth-child(5) span");
+      const hour24 = $(el).find("td:nth-child(6) span");
+      const day7 = $(el).find("td:nth-child(7) span");
 
+      coinForm.hour1 = {
+        value: hour1.text(),
+        isGreen: hour1.hasClass("text-green"),
+      };
+      coinForm.hour24 = {
+        value: hour24.text(),
+        isGreen: hour24.hasClass("text-green"),
+      };
+      coinForm.day7 = {
+        value: day7.text(),
+        isGreen: day7.hasClass("text-green"),
+      };
       coinForm.Hour24Volume = $(el).find("td:nth-child(8) span").text();
       coinForm.marketCap = $(el).find("td:nth-child(9)  span").text();
       coinForm.weeklyStat = $(el).find("td:nth-child(12) img").attr("src");

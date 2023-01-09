@@ -21,7 +21,7 @@ const Table = ({ data }) => {
         {data.map((row, index) => {
           return (
             <tr key={row.name}>
-              <td>{index}</td>
+              <td>{index + 1}</td>
               <td>
                 <Flex css={{ "& img": { padding: "0 $1" } }}>
                   <img src={row.icon} />
@@ -32,9 +32,15 @@ const Table = ({ data }) => {
                 </Flex>
               </td>
               <td>{row.price}</td>
-              <td>{row.hour1}</td>
-              <td>{row.hour24}</td>
-              <td>{row.day7}</td>
+              <td style={{ color: row.hour1.isGreen ? "green" : "red" }}>
+                {row.hour1.value}
+              </td>
+              <td style={{ color: row.hour24.isGreen ? "green" : "red" }}>
+                {row.hour24.value}
+              </td>
+              <td style={{ color: row.day7.isGreen ? "green" : "red" }}>
+                {row.day7.value}
+              </td>
               <td>{row.Hour24Volume}</td>
               <td>{row.marketCap}</td>
               <td>

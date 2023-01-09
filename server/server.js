@@ -1,20 +1,17 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const { readFileSync, writeFileSync } = require("fs");
 const app = express();
 const dotenv = require("dotenv");
-const getData = require("./scrapData");
 const { Server } = require("ws");
 const getCurrentData = require("./scrapData");
 dotenv.config();
-
 const wsServer = new Server({ port: 3232 }, () => {
   console.log("websocket listen on 3232");
 });
 
 wsServer.on("connection", (ws) => {
-  console.log("one socket connected by ", ws.url);
+  console.log("one socket connected by ");
 });
 
 setInterval(async () => {
@@ -37,7 +34,7 @@ setInterval(async () => {
   clients.forEach((c) => {
     c.send(JSON.stringify(resp));
   });
-}, 5000);
+}, 3000);
 
 app.use(
   cors({
