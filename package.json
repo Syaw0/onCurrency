@@ -1,0 +1,38 @@
+{
+  "name": "vite0toh",
+  "version": "1.0.0",
+  "description": "Simple todo app  with express , react , graphql ",
+  "scripts": {
+    "dev": "vite",
+    "server:dev": "nodemon ./server/server.js",
+    "server:start": "npm run build && npm run server",
+    "build": "vite build"
+  },
+  "keywords": [
+    "express",
+    "graphql",
+    "react",
+    "vite"
+  ],
+  "author": "syaw0",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.7.6",
+    "@vitejs/plugin-react": "^2.0.1",
+    "nodemon": "^2.0.19",
+    "vite": "^3.0.8"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
+    "zustand": "^4.0.0"
+  },
+  "proxy": "http://localhost:8080"
+}
