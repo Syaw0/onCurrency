@@ -59,7 +59,7 @@ const App = () => {
         dir="column"
         justify="start"
         align="center"
-        css={{ minHeight: "80vh", paddingTop: "$5" }}
+        css={{ minHeight: "fit-content", padding: "$5 0 " }}
       >
         {!isError && (isDataLoaded ? <Table data={data} /> : <Loader />)}
         {isError && (

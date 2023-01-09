@@ -111,5 +111,8 @@ export default globalCss({
       textAlign: "center",
       subhead1: "500",
     },
+    "& tbody tr:last-child td": {
+      border: "none",
+    },
   },
 });

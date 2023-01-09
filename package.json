@@ -6,6 +6,7 @@
     "dev": "vite",
     "server:dev": "nodemon ./server/server.js",
     "server:start": "npm run build && npm run server",
+    "server": "node ./server/server.js",
     "build": "vite build"
   },
   "keywords": [
