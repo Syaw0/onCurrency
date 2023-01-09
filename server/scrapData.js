@@ -6,13 +6,11 @@ const fetch = (...args) =>
 const getCurrentData = async () => {
   const coins = [];
 
-  console.log("getting data");
-  const resp = await fetch("https://www.coingecko.com/");
-  const data = await resp.text();
-  const $ = cheerio.load(data);
-  console.log("pars data");
-  const list = $('[data-target="currencies.contentBox"] tr').each(
-    (index, el) => {
+  try {
+    const resp = await fetch("https://www.coingecko.com/");
+    const data = await resp.text();
+    const $ = cheerio.load(data);
+    $('[data-target="currencies.contentBox"] tr').each((index, el) => {
       let coinForm = {};
       coinForm.icon = $(el).find("td:nth-child(3) div img").attr("src");
       coinForm.name = $(el)
@@ -32,10 +30,11 @@ const getCurrentData = async () => {
       coinForm.weeklyStat = $(el).find("td:nth-child(12) img").attr("src");
 
       coins.push(coinForm);
-    }
-  );
-
-  return coins;
+    });
+  } catch (err) {
+    return { status: false };
+  }
+  return { status: true, data: coins };
 };
 
 module.exports = getCurrentData;

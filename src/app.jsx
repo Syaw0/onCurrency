@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import fake from "./fake";
 import Loader from "./loader";
 import { mainStore } from "./store/mainStore";
@@ -9,7 +9,35 @@ import Table from "./table";
 
 const App = () => {
   global();
-  const [isDataLoaded, setIsDataLoaded] = useState(true);
+  useEffect(() => {
+    setWS();
+  }, []);
+
+  const setWS = async () => {
+    try {
+      const ws = new WebSocket("ws://localhost:3232");
+      ws.onopen = () => {
+        console.log("open connection successfully");
+      };
+      ws.onmessage = (msg) => {
+        const data = JSON.parse(msg.data);
+        if (!data.status) {
+          setIsError(true);
+        } else {
+          if (!isDataLoaded) {
+            setIsDataLoaded(true);
+          }
+          setIsError(false);
+          console.log("fresh data is come and i rerender");
+          setData(data.data);
+        }
+      };
+    } catch (err) {
+      setIsError(true);
+    }
+  };
+  const [data, setData] = useState([]);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isError, setIsError] = useState(false);
   return (
     <Flex
@@ -35,7 +63,7 @@ const App = () => {
         align="center"
         css={{ minHeight: "80vh", paddingTop: "$5" }}
       >
-        {!isError && (isDataLoaded ? <Table data={fake} /> : <Loader />)}
+        {!isError && (isDataLoaded ? <Table data={data} /> : <Loader />)}
         {isError && (
           <Text
             size="h6"

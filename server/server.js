@@ -14,15 +14,28 @@ const wsServer = new Server({ port: 3232 }, () => {
 });
 
 wsServer.on("connection", (ws) => {
-  console.log("one socket connected by ", ws);
+  console.log("one socket connected by ", ws.url);
 });
 
 setInterval(async () => {
+  const clients = wsServer.clients;
   // get fresh data and send it across all ws
+  if (clients.length == 0) {
+    return;
+  }
 
-  const data = await getCurrentData();
-  wsServer.clients.forEach((c) => {
-    c.send(JSON.stringify(data));
+  let data, resp;
+  try {
+    data = await getCurrentData();
+    if (!data.status) {
+      throw new Error();
+    }
+    resp = { status: true, data: data.data };
+  } catch (err) {
+    resp = { status: false, msg: "error during scrap" };
+  }
+  clients.forEach((c) => {
+    c.send(JSON.stringify(resp));
   });
 }, 5000);
 
