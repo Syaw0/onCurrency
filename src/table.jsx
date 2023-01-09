@@ -4,7 +4,7 @@ import Text from "./styles/styledComponents/text";
 import Button from "./styles/styledComponents/button";
 
 const Table = ({ data }) => {
-  const [length, setLength] = useState(1);
+  const [length, setLength] = useState(10);
   const getMore = () => {
     setLength((s) => s + 10);
   };
