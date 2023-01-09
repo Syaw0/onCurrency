@@ -4,7 +4,10 @@ const cors = require("cors");
 const { readFileSync, writeFileSync } = require("fs");
 const app = express();
 const dotenv = require("dotenv");
+// const getData = require("./scrapData");
 dotenv.config();
+
+// getCurrentData();
 
 app.use(
   cors({
