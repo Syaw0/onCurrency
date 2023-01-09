@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import fake from "./fake";
 import Loader from "./loader";
-import { mainStore } from "./store/mainStore";
 import global from "./styles/global";
 import Flex from "./styles/styledComponents/flex";
 import Text from "./styles/styledComponents/text";
